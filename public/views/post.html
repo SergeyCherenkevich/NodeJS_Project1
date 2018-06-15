@@ -1,0 +1,35 @@
+<section class ="post">
+    <p ng-bind = "vm.id"></p>
+    <div class = "content-item">
+             <div ng-bind = "vm.post.title"></div>
+             <div ng-bind = "vm.post.author"></div>
+             <div ng-bind = "vm.post.content"></div>
+             <div ng-bind = "vm.post.date"></div>
+             <div>
+                 <img ng-src="{{vm.post.file}}"></img>
+             </div>
+     </div>
+     <div class="comment">
+         <form class="comment-form" ng-submit="vm.addComment()">
+            <span class="comment-form__title">Comment</span>
+             <div class="comment-form-content">
+                 <textarea class="comment-form__input" placeholder="Comment..." ng-model = "vm.text"></textarea>
+                 <button class="comment-form__btn" type="submit">Save</button>
+            </div>
+         </form>
+         <div class="comment-item" ng-repeat="comment in vm.post.comments track by $index">
+             <div class="comment-item-head">
+                 <span class="comment_item__author" ng-bind="comment.author_email"></span>
+                 <span class="comment_item__date" ng-bind="comment.date"></span>
+             </div>
+             <div class="comment-item-content">
+                 <span class="comment_item__text" ng-bind="comment.text"></span>
+             </div>
+             <div class="comment-item-del">
+                 <form class="comment-itemform_del" ng-submit="vm.delComment(comment._id, $index, vm.post._id)" ng-if="$rootScope.currentUser.email = comment.author_email" >
+                    <button class="comment-form__btn" type="submit" >Del</button>
+                 </form>
+             </div>
+         </div>
+     </div>
+</section>

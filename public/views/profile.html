@@ -1,0 +1,42 @@
+    <!--<input type="text" ng-model="vm.myInput"/>-->
+     <!--<p>{{vm.myInput}}</p>-->
+     <form ng-submit = "vm.addPost()">
+         <input type="text" name="text" placeholder = "Title" ng-model ="vm.title"/>
+         <input type="text" name="text" placeholder = "Content" ng-model ="vm.content"/>
+         <input type="text" name="text" placeholder = "Author" ng-model = "vm.author"/>
+         <!--<input type="file" ng-model="vm.file" base-sixty-four-input required>-->
+         <input type="file" ng-file-model="vm.file" accept="image/*" multiple required>
+         <input type="submit" value="Save Add"/>
+     </form>
+    <form ng-submit = "vm.updatePost()" ng-if ="vm.showUpdateForm">
+         <input type="text" name="text" placeholder = "Title" ng-model ="vm.new_title"/>
+         <input type="text" name="text" placeholder = "Content" ng-model ="vm.new_content"/>
+         <input type="text" name="text" placeholder = "Author" ng-model = "vm.new_author"/>
+         <input type="file" ng-model="vm.new_file" base-sixty-four-input>
+         <input type="submit" value="Save Update"/>
+     </form>
+     <div class = "content">
+         <div class = "content-item head">
+             <div>Title</div>
+             <div>Author</div>
+             <div>Content</div>
+             <div>Image</div>
+             <div>Date</div>
+             <div>Action</div>
+         </div>
+         <div class = "content-item" ng-repeat = 'post in vm.posts'>
+             <div ng-bind = "post.title"></div>
+             <div ng-bind = "post.author"></div>
+             <div ng-bind = "post.content"></div>
+             <div>
+                 <img ng-src="{{post.file}}"></img>
+             </div>
+             <div ng-bind = "post.date"></div>
+             <div>
+                 <button ng-click="vm.deletePost($index, post._id)">DELETE</button>
+                 <button ng-click="vm.showUpdate($index, post._id)">UPDATE</button>
+                 <!--<a ui-sref="post({id: post._id})">More</a>-->
+             </div>
+             
+         </div>
+     </div>
